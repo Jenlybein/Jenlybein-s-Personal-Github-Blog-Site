@@ -1,10 +1,10 @@
 import { getDb } from "@/api/requestApi";
 import initSqlJs from "sql.js";
 
-const SQL = await initSqlJs({
-  locateFile: (file) => `/public/${file}`,
-});
-export async function loadDb() {
+async function loadDb() {
+  const SQL = await initSqlJs({
+    locateFile: (file) => `/${file}`,
+  });
   const dbFile = await getDb();
   if (dbFile) {
     return new SQL.Database(new Uint8Array(dbFile));
