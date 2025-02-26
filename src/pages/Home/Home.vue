@@ -2,14 +2,12 @@
     <div>
         <InfoCard class="element" v-for="(info, index) in infos" :key="info.ID" :infos="info" />
         <Pagination v-model:currentPage="PaginationData.currentPage" v-model:totalPages="PaginationData.totalPages" />
-        <Message/>
     </div>
 </template>
 
 <script setup lang="ts">
 import InfoCard from './components/InfoCard.vue';
 import Pagination from './components/Pagination.vue';
-import Message from './components/Message.vue'
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { bloglist } from '@/utils/sqliteUtils';

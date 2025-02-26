@@ -4,7 +4,8 @@
             <i class="icon-css iconfont icon-guanzhu"></i>
             公告
         </h3>
-        <p>公告内容...</p>
+        <p>博主正在努力学习中</p>
+        <p>目前方向为智慧前端</p>
     </div>
 </template>
 

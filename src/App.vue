@@ -50,6 +50,7 @@ onUpdated(() => {
 
 const items: { icon: string, label: string, route: string }[] = [
   { icon: 'icon-shequ', label: '首页', route: '/home' },
+  { icon: 'icon-shequ', label: '分类', route: '/categories' },
   { icon: 'icon-shequ', label: '标签', route: '/tags' },
   { icon: 'icon-shequ', label: '关于', route: '/about' },
 ];

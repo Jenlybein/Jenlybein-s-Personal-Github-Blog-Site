@@ -1,8 +1,8 @@
 <template>
   <Transition name="default" mode="out-in" appear>
-    <RouterLink :to="{name:'search' , query : {tags:[tag.tag_name]}}" class="tagItem">
-      <strong style="margin-right: auto ;"> <strong>#</strong> {{ tag.tag_name }}</strong>
-      <strong>{{ tag.tag_id }}</strong>
+    <RouterLink :to="{name:'search' , query : {category:category.category_name}}" class="categoryItem">
+      <strong style="margin-right: auto ;"> <strong>#</strong> {{ category.category_name }}</strong>
+      <strong>{{ category.category_id }}</strong>
     </RouterLink>
   </Transition>
 </template>
@@ -10,9 +10,9 @@
 <script setup lang="ts">
 
 
-const props = defineProps<{ tag: {
-  tag_id: string;
-  tag_name: string;
+const props = defineProps<{ category: {
+  category_id: string;
+  category_name: string;
 } }>();
 </script>
 
@@ -22,7 +22,7 @@ const props = defineProps<{ tag: {
     margin: 0;
 }
 
-.tagItem{
+.categoryItem{
   width: 70%;
 
   background-color: #f7ebd9;

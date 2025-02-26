@@ -8,6 +8,7 @@ import PagesTitle from "@/components/PagesTitle.vue";
 import Article from "@/pages/Article/Article.vue";
 import Tags from "@/pages/Tags/Tags.vue";
 import ArticleTitle from "@/pages/Article/ArticleTitle.vue";
+import Category from "@/pages/Cag/Category.vue";
 
 
 const router = createRouter({
@@ -36,6 +37,15 @@ const router = createRouter({
       },
     },
     {
+      name: "categories",
+      path: "/categories",
+      components: {
+        default: Category,
+        title: PagesTitle,
+        rightsidebar: RightSidebar,
+      },
+    },
+    {
       name: "about",
       path: "/about",
       components: {
@@ -55,15 +65,6 @@ const router = createRouter({
     },
     {
       name: "search",
-      path: "/",
-      components: {
-        default: Home,
-        title: PagesTitle,
-        rightsidebar: RightSidebar,
-      },
-    },
-    {
-      name: "tagSelected",
       path: "/",
       components: {
         default: Home,

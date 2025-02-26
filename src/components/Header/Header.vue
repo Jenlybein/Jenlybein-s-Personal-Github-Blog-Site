@@ -8,6 +8,10 @@
             <div class="search">
                 <input v-model="searchContent" class="searchInput" @keydown.enter="searchClick">
                 <button class="searchButton" @click="searchClick">搜索</button>
+                <el-select v-model="searchSelect" placeholder="Select" size="small" class="searchSelect">
+                    <el-option v-for="item in searchOptions" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
             </div>
 
             <!-- 页面跳转选项 -->
@@ -26,7 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus';
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -38,8 +41,23 @@ const { items, headerName } = defineProps<{
 
 // 搜索功能
 const searchContent = ref();
+const searchSelect = ref('');
+const searchOptions = ref([
+    {
+        value: 'blogname',
+        label: '博客标题',
+    },
+    {
+        value: 'category',
+        label: '博客分类',
+    },
+    {
+        value: 'tags',
+        label: '博客标签',
+    }
+]);
 const searchClick = () => {
-    router.push({ name: "search", query: { blogname: searchContent.value } })
+    router.push({ name: "search", query: { [searchSelect.value] : searchContent.value } })
 }
 
 // 导航栏滑块动效
@@ -76,7 +94,7 @@ function handleMouseIn() {
 };
 
 // 导航栏根据鼠标滚动显示
-let timerID : any;
+let timerID: any;
 const isOver = ref(false);
 const isHidden = ref(true);
 let lastScrollY = window.scrollY;

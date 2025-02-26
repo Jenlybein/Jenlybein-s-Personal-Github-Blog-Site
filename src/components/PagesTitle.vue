@@ -16,6 +16,7 @@ const titleContainer = ref<HTMLElement | null>(null);
 const titles = [
     { path: '/tags', name: 'Tags-标签', route: '' },
     { path: '/about', name: 'About-关于', route: '' },
+    { path: '/categories', name: 'Category-分类', route: '' },
     { path: '/login', name: '管理员登录', route: '' },
     { path: '/modify', name: '修改博客内容', route: '' },
     { path: '/upload', name: '上传博客', route: '' },

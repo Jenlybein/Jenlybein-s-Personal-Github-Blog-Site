@@ -1,8 +1,8 @@
 <template>
     <div class="profile-container">
-        <img class="profile-image" src="https://picsum.photos/100" alt="Profile Picture" />
-        <h3>博主名称</h3>
-        <p>博主的个人简介...</p>
+        <img class="profile-image" src="https://avatars.githubusercontent.com/u/149927588?v=4" alt="Profile Picture" />
+        <h3>Jenlybein</h3>
+        <p>目前是深圳技术大学的一名本科生，正在努力学习。</p>
     </div>
 </template>
 

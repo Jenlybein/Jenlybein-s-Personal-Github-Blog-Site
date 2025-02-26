@@ -49,9 +49,8 @@ export async function bloglist(criteria: {
     params.push(`%${criteria.category}%`);
   }
   if (criteria.tags) {
-    const tag_list = criteria.tags.split(",");
-    conditions.push("tag.tag_name IN (" + tag_list.map(() => "?").join(",") + ")");
-    params.push(...tag_list);
+    conditions.push("tag.tag_name LIKE ?");
+    params.push(`%${criteria.tags}%`);
   }
 
   // 拼接 WHERE 子句
@@ -70,7 +69,6 @@ export async function bloglist(criteria: {
   const columns = result[0].columns;
   const values = result[0].values;
   return values.map((row) => {
-    // 显式指定 obj 的类型为 { [key: string]: any }
     return row.reduce((obj: { [key: string]: any }, value, index) => {
       obj[columns[index]] = columns[index] === "tags" && value ? (value as string).split(",") : value;
       return obj;
@@ -115,4 +113,40 @@ export async function blog_detail(blog_id: string) {
   } else {
     return null; // 如果没有找到该 blog_id，返回 null
   }
+}
+
+// 获取所有 tags 
+export async function get_tags() {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT tag_id, tag_name FROM tag;`;
+  const result = db.exec(sqlQuery);
+
+  // 转换查询结果为 JSON 格式
+  const columns = result[0].columns;
+  const values = result[0].values;
+  return values.map((row) => {
+    return row.reduce((obj: { [key: string]: any }, value, index) => {
+      obj[columns[index]] = value;
+      return obj;
+    }, {});
+  });
+}
+
+// 获取所有 category 
+export async function get_categories() {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT category_id, category_name FROM category;`;
+  const result = db.exec(sqlQuery);
+
+  // 转换查询结果为 JSON 格式
+  const columns = result[0].columns;
+  const values = result[0].values;
+  return values.map((row) => {
+    return row.reduce((obj: { [key: string]: any }, value, index) => {
+      obj[columns[index]] = value;
+      return obj;
+    }, {});
+  });
 }
