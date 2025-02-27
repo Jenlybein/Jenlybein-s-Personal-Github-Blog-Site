@@ -13,7 +13,7 @@ async function loadDb(db: ArrayBuffer | null = null) {
   if (!db) {
     let dbFile = getDatabase();
     if (dbFile === null) {
-      let dbFile = (await getDb()).data;
+      dbFile = (await getDb()).data;
       setDatabase(dbFile as ArrayBuffer);
     }
     return makeDb(dbFile as ArrayBuffer);

@@ -1,6 +1,8 @@
 <template>
     <div>
-        <InfoCard class="element" v-for="(info, index) in infos" :key="info.ID" :infos="info" />
+        <div ref="targetElement" v-if="infos">
+            <InfoCard class="element" v-for="(info, index) in infos" :key="info.ID" :infos="info" />
+        </div>
         <Pagination v-model:currentPage="PaginationData.currentPage" v-model:totalPages="PaginationData.totalPages" />
     </div>
 </template>
@@ -19,15 +21,25 @@ const PaginationData = ref({
     totalPages: 1,
 })
 
-const infos = ref();
+// 监听 currentPage 的变化
+const targetElement = ref();
+watch(() => PaginationData.value.currentPage, (newValue, oldValue) => {
+    if (targetElement.value) {
+        if (newValue !== oldValue) {
+            targetElement.value.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
+
+const infos = ref<any>(null);
 
 // 发送 POST 请求
 const criteria = computed(() => {
     return {
         blogname: <string>route?.query?.blogname,
         category: <string>route?.query?.category,
-        end: <number>pageItemNum + (PaginationData.value.currentPage-1)*pageItemNum,
-        begin: <number>(PaginationData.value.currentPage-1)*pageItemNum,
+        end: <number>pageItemNum + (PaginationData.value.currentPage - 1) * pageItemNum,
+        begin: <number>(PaginationData.value.currentPage - 1) * pageItemNum,
         tags: <string>route?.query?.tags,
     }
 })
@@ -39,15 +51,15 @@ const getBlogList = async () => {
 
     infos.value = blogList;
     infos.value.forEach((item: any) => {
-        item.image = 'https://picsum.photos/260/161?'+ Math.random()
+        item.image = 'https://picsum.photos/260/161?' + Math.random()
     });
 
-    PaginationData.value.totalPages = blogcount / pageItemNum + ((blogcount % pageItemNum)?1:0);
+    PaginationData.value.totalPages = blogcount / pageItemNum + ((blogcount % pageItemNum) ? 1 : 0);
 }
 
-watch(criteria, ()=>{
+watch(criteria, () => {
     getBlogList()
-}, {deep : true});
+}, { deep: true });
 
 onMounted(async () => {
     await getBlogList();
