@@ -18,13 +18,13 @@
             <div v-show="activeName === 'deploy'" style="width: 100%; height: 100%;">
 
                 <div class="inputf">
-                    <textarea class="textarea" v-model="blogData.blog_name" type="text" placeholder="" maxlength="20" />
+                    <textarea class="textarea" v-model="blogData.blog_name" type="text" placeholder="" maxlength="50" />
                     <span class="label">标题</span>
                 </div>
 
                 <div class="inputf">
                     <textarea class="textarea" v-model="blogData.category_name" type="text" placeholder=""
-                        maxlength="20" />
+                        maxlength="50" />
                     <span class="label">分类</span>
                 </div>
 
@@ -60,7 +60,7 @@
             <div v-show="activeName === 'delete'" style="width: 100%; height: 100%;">
 
                 <div class="inputf">
-                    <textarea class="textarea" v-model="blogData.blog_name" type="text" placeholder="" maxlength="20" />
+                    <textarea class="textarea" v-model="blogData.blog_name" type="text" placeholder="" maxlength="50" />
                     <span class="label">请输入完整标题</span>
                 </div>
 

@@ -1,12 +1,15 @@
 import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
 import { figure } from "@mdit/plugin-figure";
+//import markdownItKatex from 'markdown-it-katex';
+// import markdownItMathjax from 'markdown-it-mathjax';
+import texmath from "markdown-it-texmath";
 
 const md = new MarkdownIt({
   html: true, // 允许渲染 HTML 标签
   linkify: true, // 自动识别链接
-  typographer: true, // 启用一些语言学的替换和格式
-  breaks: true,
+  typographer: false, // 启用一些语言学的替换和格式
+  breaks: false, // 自动解析换行符
   highlight: function (str: string, lang: string | undefined): string {
     // 添加返回类型和参数类型注解
     if (lang && hljs.getLanguage(lang)) {
@@ -28,6 +31,7 @@ const md = new MarkdownIt({
 });
 
 // 使用插件
+md.use(texmath, { engine: "katex" });
 md.use(figure);
 
 // 给渲染的html标签加上名为markdown的class，因为无法在vue页面内用scoped渲染，所以用这个方法。
@@ -79,6 +83,28 @@ function encodeImagePaths(markdown: string): string {
   });
 }
 
+// 公式修正
+function transformMarkdownFormula(markdown: any) {
+  // 匹配单行公式 ($...$) 和多行公式 ($$...$$)，并捕获公式内容
+  const formulaRegex = /(\${1,2})([\s\S]*?)(\1)/g;
+
+  // 替换匹配到的公式
+  return markdown.replace(formulaRegex, (match: any, p1: any, p2: any) => {
+    // 对公式内容进行处理,去除前后空格
+    let formulaContent = p2.trim();
+
+    // 对于多行公式（$$...$$），将公式内容转为一行
+    if (p1 === "$$") {
+      formulaContent = formulaContent
+        .replace(/^>+/gm, "")
+        .replace(/\n+/g, " ")
+        .trim();
+    }
+
+    return `${p1}${formulaContent}${p1}`;
+  });
+}
+
 /**
  * 将markdown文本渲染为html
  * @param markdown 需要渲染的文本
@@ -87,6 +113,7 @@ function encodeImagePaths(markdown: string): string {
  */
 export function MdRender(markdown: string, className: string = "") {
   MdRenderRule(className);
-  const blogContent = encodeImagePaths(markdown);
+  let blogContent = encodeImagePaths(markdown);
+  blogContent = transformMarkdownFormula(blogContent);
   return md.render(blogContent);
 }
