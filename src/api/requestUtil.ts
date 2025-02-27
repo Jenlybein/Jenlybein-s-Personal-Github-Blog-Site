@@ -1,9 +1,11 @@
 import axios from "axios";
+
 import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 import { ElMessage } from "element-plus";
 
-import "nprogress/nprogress.css";
+
 
 const service = axios.create({
   timeout: 50000,

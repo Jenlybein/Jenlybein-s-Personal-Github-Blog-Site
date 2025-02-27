@@ -33,6 +33,9 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
 const router = useRouter();
 const { items, headerName } = defineProps<{
     items: { icon: string, label: string, route: string }[],
@@ -41,7 +44,7 @@ const { items, headerName } = defineProps<{
 
 // 搜索功能
 const searchContent = ref();
-const searchSelect = ref('');
+const searchSelect = ref('blogname');
 const searchOptions = ref([
     {
         value: 'blogname',
@@ -58,6 +61,10 @@ const searchOptions = ref([
 ]);
 const searchClick = () => {
     router.push({ name: "search", query: { [searchSelect.value] : searchContent.value } })
+    NProgress.start();
+    setTimeout(()=>{
+        NProgress.done();
+    },500)
 }
 
 // 导航栏滑块动效
