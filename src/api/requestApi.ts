@@ -10,8 +10,6 @@ export const getDb = async () => {
 };
 
 export const getBlog = async (address: string) => {
-  const mdFile = await request.get(
-    "https://raw.githubusercontent.com/Jenlybein/Notes-Markdown/main/" + address
-  );
+  const mdFile = await request.get(address);
   return mdFile.data;
 };

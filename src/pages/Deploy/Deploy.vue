@@ -160,7 +160,7 @@ async function confirmDelete() {
     if (confirmed) {
         let blog_id = await get_blog_id(blogData.value.blog_name, dbFile.value)
 
-        if(!blog_id){
+        if (!blog_id) {
             ElMessage.error("不存在对应名称的博客！")
             return null
         }
@@ -196,7 +196,7 @@ async function sqlGen() {
     }
 
     // 对 github 地址进行修改
-    let pull_address = decodeURIComponent(blogData.value.pull_address.replace('https://github.com/Jenlybein/Notes-Markdown/blob/main/', ''));
+    let pull_address = decodeURIComponent(blogData.value.pull_address.replace('https://github.com', 'https://raw.githubusercontent.com')).replace('blob/', '');
 
     // 生成 blog 插入语句
     blogSQL += `INSERT INTO blog (blog_name, category_id, pull_address) 
