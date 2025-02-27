@@ -1,10 +1,12 @@
 <template>
   <Transition name="default" mode="out-in" appear>
     <div class="info-card">
-
-      <RouterLink :to="'/article/' + infos.blog_id" class="info-card-image">
-        <img style="height: 100%;" :src="infos.image" />
-      </RouterLink>
+      <div v-if="!isLoaded" class="info-card-image"></div>
+      <Transition name="default" mode="out-in" appear>
+        <RouterLink v-show="isLoaded" :to="'/article/' + infos.blog_id" class="info-card-image">
+          <img style="height: 100%;" :src="infos.image" @load="onImageLoad" />
+        </RouterLink>
+      </Transition>
 
       <div class="info-card-content">
         <h2>
@@ -25,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 interface InfoImpl {
   blog_id: Number
@@ -36,8 +38,13 @@ interface InfoImpl {
   image: string;
 }
 
-const router = useRouter();
 const props = defineProps<{ infos: InfoImpl }>();
+
+const isLoaded = ref(false);
+
+const onImageLoad = () => {
+  isLoaded.value = true;  // 图片加载完成后，触发滑入动画
+};
 </script>
 
 <style src="./InfoCard.css" scoped></style>

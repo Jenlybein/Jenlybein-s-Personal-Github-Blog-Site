@@ -38,7 +38,7 @@ const getBlogList = async () => {
 
     infos.value = blogList;
     infos.value.forEach((item: any) => {
-        item.image = 'https://picsum.photos/260/161'
+        item.image = 'https://picsum.photos/260/161?'+ Math.random()
     });
 
     let blogcount = blogList.length;

@@ -1,7 +1,7 @@
 <template>
     <div class="titleContainer">
         <div class="title">
-            <h1 class="titleText"><strong>SZTU student's Blog</strong></h1>
+            <h1 class="titleText"><strong>Jenlybein's Personal Blog</strong></h1>
             <div class="typing">
                 <h4 class="typing">{{ typingWords }}</h4>
                 <h4 class="animation">|</h4>
@@ -34,12 +34,13 @@ async function fetchData() {
 }
 
 // 挂载组件后立即启动
-onMounted(() => {
+const TypingStart = () => {
     nextTick(() => {
         fetchData();
         window.addEventListener('scroll', handleScroll);
     })
-});
+}
+onMounted(TypingStart);
 
 // 下拉提示
 const arror = ref<HTMLElement | null>(null)

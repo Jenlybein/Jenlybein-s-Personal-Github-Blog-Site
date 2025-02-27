@@ -4,11 +4,9 @@
   <div id="titleContainer" ref="titleContainer" class="title-container">
 
     <RouterView name="title" v-slot="{ Component }" :key="$route.path">
-      <KeepAlive>
         <transition name="default" mode="out-in" appear>
           <component :is="Component" />
         </transition>
-      </KeepAlive>
     </RouterView>
   </div>
 

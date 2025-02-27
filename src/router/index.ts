@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 import Home from "@/pages/Home/Home.vue";
 import Test2 from "@/pages/About/About.vue";
@@ -12,7 +12,7 @@ import Category from "@/pages/Cag/Category.vue";
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       name: "home",
