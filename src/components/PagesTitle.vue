@@ -17,9 +17,7 @@ const titles = [
     { path: '/tags', name: 'Tags-标签', route: '' },
     { path: '/about', name: 'About-关于', route: '' },
     { path: '/categories', name: 'Category-分类', route: '' },
-    { path: '/login', name: '管理员登录', route: '' },
-    { path: '/modify', name: '修改博客内容', route: '' },
-    { path: '/upload', name: '上传博客', route: '' },
+    { path: '/deploy', name: 'Deploy-管理', route: '' },
     { path: '/', name: '标签-博客', route: 'tags' },
     { path: '/', name: '搜索', route: 'blogname' },
 ];

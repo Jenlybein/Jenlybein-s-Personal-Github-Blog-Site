@@ -150,3 +150,78 @@ export async function get_categories() {
     }, {});
   });
 }
+
+// 按 category 名称 寻找对应 id
+export async function get_category_id(category:string) {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT category_id FROM category where category_name = ?;`;
+  const result = db.exec(sqlQuery,[category]);
+
+  const row = result[0]?.values[0];
+  if (row) {
+    return row[0] as number;
+  } else {
+    return null;
+  }
+}
+
+// 查找 category 库中的数据量
+export async function get_category_count() {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT COUNT(*) FROM category;`;
+  const result = db.exec(sqlQuery);
+
+  const row = result[0]?.values[0];
+  if (row) {
+    return row[0] as number;
+  } else {
+    return 0;
+  }
+}
+
+// 按 tag 名称 寻找对应 id
+export async function get_tag_id(tag:string) {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT tag_id FROM tag where tag_name = ?;`;
+  const result = db.exec(sqlQuery,[tag]);
+
+  const row = result[0]?.values[0];
+  if (row) {
+    return row[0] as number;
+  } else {
+    return null;
+  }
+}
+
+// 查找 tag 库中的数据量
+export async function get_tag_count() {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT COUNT(*) FROM tag;`;
+  const result = db.exec(sqlQuery);
+
+  const row = result[0]?.values[0];
+  if (row) {
+    return row[0] as number;
+  } else {
+    return 0;
+  }
+}
+
+// 查找 blog 库中的数据量
+export async function get_blog_count() {
+  const db = await loadDb();
+
+  const sqlQuery = `SELECT COUNT(*) FROM blog;`;
+  const result = db.exec(sqlQuery);
+
+  const row = result[0]?.values[0];
+  if (row) {
+    return row[0] as number;
+  } else {
+    return 0;
+  }
+}

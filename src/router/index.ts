@@ -9,6 +9,7 @@ import Article from "@/pages/Article/Article.vue";
 import Tags from "@/pages/Tags/Tags.vue";
 import ArticleTitle from "@/pages/Article/ArticleTitle.vue";
 import Category from "@/pages/Cag/Category.vue";
+import Deploy from "@/pages/Deploy/Deploy.vue";
 
 
 const router = createRouter({
@@ -70,6 +71,14 @@ const router = createRouter({
         default: Home,
         title: PagesTitle,
         rightsidebar: RightSidebar,
+      },
+    },
+    {
+      name: "deploy",
+      path: "/deploy",
+      components: {
+        default: Deploy,
+        title: PagesTitle,
       },
     },
   ],
