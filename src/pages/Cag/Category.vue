@@ -7,12 +7,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import CategoryItem from './components/CategoryItem.vue';
-import { get_categories } from '@/utils/sqliteUtils';
+import { get_categories, loadNetDb } from '@/utils/sqliteUtils';
 
 const categories = ref();
 
 onMounted(async () => {
-    categories.value = await get_categories();
+    const data = await loadNetDb();
+    categories.value = await get_categories(data);
 })
 </script>
 

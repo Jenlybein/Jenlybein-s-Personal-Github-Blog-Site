@@ -8,7 +8,7 @@
 import { nextTick, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { MdRender } from '@/utils/mditUtils';
-import { blog_detail } from '@/utils/sqliteUtils';
+import { blog_detail, loadNetDb } from '@/utils/sqliteUtils';
 import emitter from '@/utils/mittUtils';
 import 'highlight.js/styles/atom-one-dark.css'
 import '@/assets/markdown.css'  // markdown样式设置
@@ -19,8 +19,9 @@ const route = useRoute();
 const renderedText = ref();
 
 onMounted(async () => {
-  const blog_infos = await blog_detail(route.params.id as string)
-  const blog_content = await getBlog(blog_infos?.pull_address as string)
+  const data = await loadNetDb();
+  const blog_infos = await blog_detail(route.params.id as string, data);
+  const blog_content = await getBlog(blog_infos?.pull_address as string);
 
   // markdown图片地址转化
   const mdRegex = /!\[.*?\]\((\.\.\/.*?|\.\/.*?)\)/g;
@@ -32,7 +33,6 @@ onMounted(async () => {
     const absolutePath = relativePath.replace(/^(\.\/|\.\.\/)/, updatedAddress);
     return match.replace(relativePath, absolutePath);
   });
-
   updatedMdText = updatedMdText.replace(htmlRegex, (match: any, relativePath: any) => {
     const absolutePath = relativePath.replace(/^(\.\/|\.\.\/)/, updatedAddress);
     return match.replace(relativePath, absolutePath);

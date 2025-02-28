@@ -12,7 +12,7 @@ import InfoCard from './components/InfoCard.vue';
 import Pagination from './components/Pagination.vue';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { bloglist, blogCount } from '@/utils/sqliteUtils';
+import { bloglist, blogCount, loadNetDb } from '@/utils/sqliteUtils';
 const route = useRoute();
 
 const pageItemNum = 8
@@ -46,8 +46,9 @@ const criteria = computed(() => {
 
 const getBlogList = async () => {
     // 初始博客列表信息
-    const blogList = await bloglist(criteria.value);
-    const blogcount = await blogCount(criteria.value) as number;
+    const data = await loadNetDb();
+    const blogList = await bloglist(data, criteria.value);
+    const blogcount = await blogCount(criteria.value, data) as number;
 
     infos.value = blogList;
     infos.value.forEach((item: any) => {
