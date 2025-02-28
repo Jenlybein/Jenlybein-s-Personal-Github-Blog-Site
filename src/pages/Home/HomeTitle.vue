@@ -1,7 +1,7 @@
 <template>
     <div class="titleContainer">
         <div class="title">
-            <h1 class="titleText"><strong>Jenlybein's Personal Blog</strong></h1>
+            <h1 class="titleText"><strong>{{ FirstTitle }}</strong></h1>
             <div class="typing">
                 <h4 class="typing">{{ typingWords }}</h4>
                 <h4 class="animation">|</h4>
@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue';
 import { load } from 'jinrishici';
+import { FirstTitle } from '@/config'
 import { useTypingEffect, setTypingWords } from '@/hooks/useTyping'; // 引用打字机效果
 
 // 使用打字机效果

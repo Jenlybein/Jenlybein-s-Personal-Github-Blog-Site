@@ -1,20 +1,38 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
 
 .info-card {
   display: flex;
   align-items: center;
   background-color: antiquewhite;
-  padding: 0;
-  margin: 0;
-  height: 220px;
+  
+  /* 动态宽度控制 */
+  width: min(90%, 1200px);
+  margin: 20px auto;
+  
+  /* 动态高度（保持原比例） */
+  height: min(18.3vw, 220px); /* 220/1200 ≈ 0.183 */
+  min-height: 200px;
+  
+  /* 视觉样式（保持原样） */
   border: 1px solid #0c00002a;
   border-radius: 1em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease;
+  transition: all 0.3s ease;
   overflow: hidden;
+
+  /* 动态缩放 */
+  transform: scale(100vw/3600);
+  transform-origin: top center;
+}
+
+@media (min-width: 1600px) {
+  .info-card {
+    transform: none; /* 大屏禁用缩放 */
+    height: 220px; /* 恢复固定高度 */
+  }
 }
 
 .info-card:hover {
@@ -26,16 +44,19 @@
 }
 
 .info-card-image {
+  height: 100%; /* 继承父级动态高度 */
+  width: min(400px, 30%); /* 响应式宽度 */
   margin-right: 20px;
-  width: 340px;
-  height: 220px;
   overflow: hidden;
   background-color: #ff8400;
   transition: height 0.5s ease;
+  flex-shrink: 0;
 }
 
-.info-card-content{
-    flex: 1;
+.info-card-content {
+  flex: 2 1 min(400px, 55%); /* 响应式弹性 */
+  min-width: 300px; /* 适当减小最小宽度 */
+  padding: 10px;
 }
 
 .info-card-meta {
@@ -57,7 +78,6 @@
   color: #ff8400;
 }
 
-/* Transition组件切换动效 */
 .default-enter-active {
   transition: opacity 0.5s, transform 0.5s, height 0.5s;
 }
@@ -73,13 +93,7 @@
   transform: translateY(0px);
 }
 
-.login-operate{
-  display: flex;
-  margin-top: 1em;
-  margin-left: 60%;
-}
-
-.operate-button{
+.operate-button {
   outline: none;
   border: none;
   padding: 0.45em 1em;

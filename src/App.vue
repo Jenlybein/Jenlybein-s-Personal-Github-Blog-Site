@@ -1,5 +1,5 @@
 <template>
-  <Header class="header" :items headerName="Jenlybein's Personal Blog"/>
+  <Header class="header" :items :headerName />
 
   <div id="titleContainer" ref="titleContainer" class="title-container">
 
@@ -35,6 +35,7 @@ import Footer from './components/Footer.vue';
 import Header from './components/Header/Header.vue';
 import Music from './components/MusicPlayer/MusicPlayer.vue';
 import dynamicHeight from '@/hooks/useDynamicHeight';
+import { headerName } from '@/config'
 
 const contentContainer = ref<HTMLElement | null>(null);
 const titleContainer = ref<HTMLElement | null>(null);
@@ -53,7 +54,6 @@ const items: { icon: string, label: string, route: string }[] = [
   { icon: 'icon-shequ', label: '关于', route: '/about' },
   { icon: 'icon-shequ', label: '管理', route: '/deploy' },
 ];
-
 </script>
 
 <style scoped>

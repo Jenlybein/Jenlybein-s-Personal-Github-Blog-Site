@@ -1,6 +1,7 @@
 <template>
   <Transition name="default" mode="out-in" appear>
     <div class="info-card">
+      
       <div v-if="!isLoaded" class="info-card-image"></div>
       <Transition name="default" mode="out-in" appear>
         <RouterLink v-show="isLoaded" :to="'/article/' + infos.blog_id" class="info-card-image">
@@ -19,8 +20,7 @@
           <span>标签：</span>
           <span v-for="tag in infos.tags" :key="tag" class="tag">&nbsp;-{{ tag }}</span>
         </div>
-        <p class="info-card-summary">{{ infos.pull_address }}</p>
-
+        <div class="info-card-summary">{{ infos.pull_address }}</div>
       </div>
     </div>
   </Transition>

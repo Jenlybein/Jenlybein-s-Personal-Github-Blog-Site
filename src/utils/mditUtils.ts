@@ -9,7 +9,7 @@ const md = new MarkdownIt({
   html: true, // 允许渲染 HTML 标签
   linkify: true, // 自动识别链接
   typographer: false, // 启用一些语言学的替换和格式
-  breaks: false, // 自动解析换行符
+  breaks: true, // 自动解析换行符
   highlight: function (str: string, lang: string | undefined): string {
     // 添加返回类型和参数类型注解
     if (lang && hljs.getLanguage(lang)) {

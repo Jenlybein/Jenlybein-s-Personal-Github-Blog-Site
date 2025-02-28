@@ -1,18 +1,15 @@
 <template>
     <div class="about">
-        <div>
-            暂时还不知道怎么介绍自己哈，搁置一下......<br />
-        </div>
-
-        <div>
-            此网站是基于 Github Pages 运行。<br>
-            <strong>项目仓库：</strong><a href="https://github.com/Jenlybein/Jenlybein-s-Personal-Github-Blog-Site">Jenlybein-s-Personal-Github-Blog-Site</a>
-        </div>
+        <div v-html="AboutHtml"></div>
     </div>
 </template>
 
 <script setup lang="ts">
-
+import { AboutContent } from '@/config'
+import { MdRender } from '@/utils/mditUtils';
+import { ref } from 'vue';
+const AboutHtml = ref('');
+AboutHtml.value = MdRender(AboutContent, "markdown");
 </script>
 
 <style scoped>

@@ -4,12 +4,17 @@
             <i class="icon-css iconfont icon-guanzhu"></i>
             公告
         </h3>
-        <p>博主正在努力学习中</p>
-        <p>目前方向为智慧前端</p>
+        <div v-html="AnnounceHtml"></div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { AnnounceStr } from '@/config';
+import { MdRender } from '@/utils/mditUtils';
+import { ref } from 'vue';
+
+const AnnounceHtml = ref('');
+AnnounceHtml.value = MdRender(AnnounceStr, "markdown");
 </script>
 
 <style scoped>
@@ -26,34 +31,44 @@
     font-size: 24px;
     animation: shake 1s linear infinite;
 }
+
 @keyframes shake {
     0% {
         transform: rotate(0deg);
     }
+
     1% {
         transform: rotate(10deg);
     }
+
     10% {
         transform: rotate(-20deg);
     }
+
     15% {
         transform: rotate(30deg);
     }
+
     20% {
         transform: rotate(-40deg);
     }
+
     25% {
         transform: rotate(30deg);
     }
+
     30% {
         transform: rotate(-20deg);
     }
-    35%{
+
+    35% {
         transform: rotate(10deg);
     }
-    36%{
+
+    36% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
